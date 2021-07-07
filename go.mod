@@ -1,4 +1,4 @@
-module proto-definition
+module github.com/davidae/proto-definition
 
 go 1.16
 
