@@ -9,4 +9,5 @@ import "google/protobuf/timestamp.proto";
 message Greeting {
 	string from = 1;
 	google.protobuf.Timestamp last_updated = 2;
+	string to = 3;
 }
