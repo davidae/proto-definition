@@ -5,4 +5,4 @@ all:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go
 	go install github.com/srikrsna/protoc-gen-gotag
 	protoc -I /usr/local/include -I=proto --go_out=paths=source_relative:./proto proto/*.proto
-	protoc -I /usr/local/include -I proto/ --gotag_out=outdir="./home/davidae/code/":./home/davidae/code/ proto/*.proto
+	protoc -I /usr/local/include -I proto/ --gotag_out=outdir="$(GOPATH)/src":$(GOPATH)/src proto/*.proto
