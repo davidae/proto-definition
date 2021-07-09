@@ -1,13 +1,14 @@
 syntax = "proto3";
 package event;
 
-option go_package = "/event";
+option go_package = "github.com/davidae/proto-definition/event;event";
 
 
 import "google/protobuf/timestamp.proto";
+import "tagger.proto";
 
 message Greeting {
-	string from = 1;
+	string from = 1 [(tagger.tags) = "graphql:\"withNewTags,optional\"" ];
 	google.protobuf.Timestamp last_updated = 2;
 	optional string to = 3;
 }
