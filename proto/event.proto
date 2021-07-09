@@ -5,7 +5,7 @@ option go_package = "github.com/davidae/proto-definition/proto";
 
 
 import "google/protobuf/timestamp.proto";
-import "tagger/tagger.proto";
+import "tagger.proto";
 
 message Greeting {
 	string from = 1 [(tagger.tags) = "graphql:\"withNewTags,optional\"" ];
