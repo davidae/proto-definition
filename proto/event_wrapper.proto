@@ -1,0 +1,17 @@
+syntax = "proto3";
+package event;
+
+option go_package = "github.com/davidae/proto-definition/proto/go";
+
+
+import "google/protobuf/timestamp.proto";
+import "tagger.proto";
+import "google/protobuf/wrappers.proto";
+
+
+message GreetingWrapp {
+	google.protobuf.StringValue from = 1;
+	google.protobuf.Timestamp last_updated = 2;
+	google.protobuf.StringValue to = 3;
+	repeated sint32 publisher_categories = 4;
+}

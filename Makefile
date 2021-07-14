@@ -16,6 +16,22 @@ all:
 		proto/*.proto
 	protoc -I /usr/local/include -I proto/ --gotag_out=outdir="$(GOPATH)/src":$(GOPATH)/src proto/*.proto
 
+gogo:
+	go get -u github.com/gogo/protobuf/protoc-gen-gofast
+	go get -u github.com/gogo/protobuf/types
+	go install github.com/gogo/protobuf/protoc-gen-gofast
+	mkdir -p proto/gogo
+	protoc -I /usr/local/include -I proto \
+	-I=$(GOPATH)/src/github.com/gogo/protobuf/protobuf \
+	--gofast_out=plugins=grpc,\
+	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
+	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:./proto/gogo \
+	proto/event_wrapper.proto
+
 clean:
 	rm -fr proto/go
 	rm -fr proto/java
+	rm -fr proto/gogo
