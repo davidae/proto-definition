@@ -12,6 +12,7 @@ message Greeting {
 	google.protobuf.Timestamp last_updated = 2 [(tagger.tags) = "parquet:\"name=last_updated, type=INT64, convertedtype=TIMESTAMP_MILLIS\""];
 	optional string to = 3 [(tagger.tags) = "parquet:\"name=to, type=BYTE_ARRAY, encoding=PLAIN_DICTIONARY\""];
 	repeated sint32 publisher_categories = 4 [(tagger.tags) = "parquet:\"name=publisher_categories, type=INT32 repetitiontype=REPEATED\""];
+	AddressPointer address = 5;
 }
 
 message GreetingSimple {
@@ -19,4 +20,36 @@ message GreetingSimple {
 	int64 last_updated = 2 [(tagger.tags) = "parquet:\"name=last_updated, type=INT64, convertedtype=TIMESTAMP_MILLIS\""];
 	optional string to = 3 [(tagger.tags) = "parquet:\"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
 	repeated sint32 publisher_categories = 4 [(tagger.tags) = "parquet:\"name=publisher_categories, type=INT32, repetitiontype=REPEATED\""];
+}
+
+message GreetingValue {
+	string from = 1 [(tagger.tags) = "parquet:\"name=from,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
+	google.protobuf.Timestamp last_updated = 2 [(tagger.tags) = "parquet:\"name=last_updated, type=INT64, convertedtype=TIMESTAMP_MILLIS\""];
+	optional string to = 3 [(tagger.tags) = "parquet:\"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
+	repeated sint32 publisher_categories = 4 [(tagger.tags) = "parquet:\"name=publisher_categories, type=INT32, repetitiontype=REPEATED\""];
+	AddressValue address = 5;
+}
+
+message AddressPointer {
+	optional string street = 1;
+	optional uint32 post_code = 2;
+	optional PersonPointer person = 3;
+	optional bool use_for_billing  = 4;
+}
+
+message PersonPointer {
+	optional string first_name = 1;
+	optional string last_name = 2;
+}
+
+message AddressValue {
+	string street = 1;
+	uint32 post_code = 2;
+	PersonValue person = 3;
+	bool use_for_billing  = 4;
+}
+
+message PersonValue {
+	string first_name = 1;
+	string last_name = 2;
 }

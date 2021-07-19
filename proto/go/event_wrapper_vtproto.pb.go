@@ -50,6 +50,18 @@ func (m *GreetingWrapp) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if vtmsg, ok := m.Baz.(interface {
+		MarshalToVT([]byte) (int, error)
+		SizeVT() int
+	}); ok {
+		{
+			size := vtmsg.SizeVT()
+			i -= size
+			if _, err := vtmsg.MarshalToVT(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
 	if len(m.PublisherCategories) > 0 {
 		var pksize2 int
 		for _, num := range m.PublisherCategories {
@@ -140,6 +152,35 @@ func (m *GreetingWrapp) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *GreetingWrapp_BazNull) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *GreetingWrapp_BazNull) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i--
+	if m.BazNull {
+		dAtA[i] = 1
+	} else {
+		dAtA[i] = 0
+	}
+	i--
+	dAtA[i] = 0x28
+	return len(dAtA) - i, nil
+}
+func (m *GreetingWrapp_BazValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *GreetingWrapp_BazValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i = encodeVarint(dAtA, i, uint64(m.BazValue))
+	i--
+	dAtA[i] = 0x30
+	return len(dAtA) - i, nil
+}
 func (m *GreetingWrapp) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -183,12 +224,33 @@ func (m *GreetingWrapp) SizeVT() (n int) {
 		}
 		n += 1 + sov(uint64(l)) + l
 	}
+	if vtmsg, ok := m.Baz.(interface{ SizeVT() int }); ok {
+		n += vtmsg.SizeVT()
+	}
 	if m.unknownFields != nil {
 		n += len(m.unknownFields)
 	}
 	return n
 }
 
+func (m *GreetingWrapp_BazNull) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 2
+	return n
+}
+func (m *GreetingWrapp_BazValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 1 + sov(uint64(m.BazValue))
+	return n
+}
 func (m *GreetingWrapp) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -428,6 +490,47 @@ func (m *GreetingWrapp) UnmarshalVT(dAtA []byte) error {
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field PublisherCategories", wireType)
 			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BazNull", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.Baz = &GreetingWrapp_BazNull{b}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BazValue", wireType)
+			}
+			var v int32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Baz = &GreetingWrapp_BazValue{v}
 		default:
 			iNdEx = preIndex
 			skippy, err := skip(dAtA[iNdEx:])

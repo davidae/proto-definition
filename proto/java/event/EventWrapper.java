@@ -79,6 +79,38 @@ public final class EventWrapper {
      * @return The publisherCategories at the given index.
      */
     int getPublisherCategories(int index);
+
+    /**
+     * <pre>
+     * always set this to "true" when null
+     * </pre>
+     *
+     * <code>bool baz_null = 5;</code>
+     * @return Whether the bazNull field is set.
+     */
+    boolean hasBazNull();
+    /**
+     * <pre>
+     * always set this to "true" when null
+     * </pre>
+     *
+     * <code>bool baz_null = 5;</code>
+     * @return The bazNull.
+     */
+    boolean getBazNull();
+
+    /**
+     * <code>int32 baz_value = 6;</code>
+     * @return Whether the bazValue field is set.
+     */
+    boolean hasBazValue();
+    /**
+     * <code>int32 baz_value = 6;</code>
+     * @return The bazValue.
+     */
+    int getBazValue();
+
+    public event.EventWrapper.GreetingWrapp.BazCase getBazCase();
   }
   /**
    * Protobuf type {@code event.GreetingWrapp}
@@ -187,6 +219,16 @@ public final class EventWrapper {
               input.popLimit(limit);
               break;
             }
+            case 40: {
+              bazCase_ = 5;
+              baz_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bazCase_ = 6;
+              baz_ = input.readInt32();
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -220,6 +262,47 @@ public final class EventWrapper {
       return event.EventWrapper.internal_static_event_GreetingWrapp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               event.EventWrapper.GreetingWrapp.class, event.EventWrapper.GreetingWrapp.Builder.class);
+    }
+
+    private int bazCase_ = 0;
+    private java.lang.Object baz_;
+    public enum BazCase
+        implements com.google.protobuf.Internal.EnumLite,
+            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+      BAZ_NULL(5),
+      BAZ_VALUE(6),
+      BAZ_NOT_SET(0);
+      private final int value;
+      private BazCase(int value) {
+        this.value = value;
+      }
+      /**
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static BazCase valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static BazCase forNumber(int value) {
+        switch (value) {
+          case 5: return BAZ_NULL;
+          case 6: return BAZ_VALUE;
+          case 0: return BAZ_NOT_SET;
+          default: return null;
+        }
+      }
+      public int getNumber() {
+        return this.value;
+      }
+    };
+
+    public BazCase
+    getBazCase() {
+      return BazCase.forNumber(
+          bazCase_);
     }
 
     public static final int FROM_FIELD_NUMBER = 1;
@@ -328,6 +411,56 @@ public final class EventWrapper {
     }
     private int publisherCategoriesMemoizedSerializedSize = -1;
 
+    public static final int BAZ_NULL_FIELD_NUMBER = 5;
+    /**
+     * <pre>
+     * always set this to "true" when null
+     * </pre>
+     *
+     * <code>bool baz_null = 5;</code>
+     * @return Whether the bazNull field is set.
+     */
+    @java.lang.Override
+    public boolean hasBazNull() {
+      return bazCase_ == 5;
+    }
+    /**
+     * <pre>
+     * always set this to "true" when null
+     * </pre>
+     *
+     * <code>bool baz_null = 5;</code>
+     * @return The bazNull.
+     */
+    @java.lang.Override
+    public boolean getBazNull() {
+      if (bazCase_ == 5) {
+        return (java.lang.Boolean) baz_;
+      }
+      return false;
+    }
+
+    public static final int BAZ_VALUE_FIELD_NUMBER = 6;
+    /**
+     * <code>int32 baz_value = 6;</code>
+     * @return Whether the bazValue field is set.
+     */
+    @java.lang.Override
+    public boolean hasBazValue() {
+      return bazCase_ == 6;
+    }
+    /**
+     * <code>int32 baz_value = 6;</code>
+     * @return The bazValue.
+     */
+    @java.lang.Override
+    public int getBazValue() {
+      if (bazCase_ == 6) {
+        return (java.lang.Integer) baz_;
+      }
+      return 0;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -358,6 +491,14 @@ public final class EventWrapper {
       }
       for (int i = 0; i < publisherCategories_.size(); i++) {
         output.writeSInt32NoTag(publisherCategories_.getInt(i));
+      }
+      if (bazCase_ == 5) {
+        output.writeBool(
+            5, (boolean)((java.lang.Boolean) baz_));
+      }
+      if (bazCase_ == 6) {
+        output.writeInt32(
+            6, (int)((java.lang.Integer) baz_));
       }
       unknownFields.writeTo(output);
     }
@@ -394,6 +535,16 @@ public final class EventWrapper {
         }
         publisherCategoriesMemoizedSerializedSize = dataSize;
       }
+      if (bazCase_ == 5) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(
+              5, (boolean)((java.lang.Boolean) baz_));
+      }
+      if (bazCase_ == 6) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(
+              6, (int)((java.lang.Integer) baz_));
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -426,6 +577,19 @@ public final class EventWrapper {
       }
       if (!getPublisherCategoriesList()
           .equals(other.getPublisherCategoriesList())) return false;
+      if (!getBazCase().equals(other.getBazCase())) return false;
+      switch (bazCase_) {
+        case 5:
+          if (getBazNull()
+              != other.getBazNull()) return false;
+          break;
+        case 6:
+          if (getBazValue()
+              != other.getBazValue()) return false;
+          break;
+        case 0:
+        default:
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -452,6 +616,19 @@ public final class EventWrapper {
       if (getPublisherCategoriesCount() > 0) {
         hash = (37 * hash) + PUBLISHER_CATEGORIES_FIELD_NUMBER;
         hash = (53 * hash) + getPublisherCategoriesList().hashCode();
+      }
+      switch (bazCase_) {
+        case 5:
+          hash = (37 * hash) + BAZ_NULL_FIELD_NUMBER;
+          hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+              getBazNull());
+          break;
+        case 6:
+          hash = (37 * hash) + BAZ_VALUE_FIELD_NUMBER;
+          hash = (53 * hash) + getBazValue();
+          break;
+        case 0:
+        default:
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -606,6 +783,8 @@ public final class EventWrapper {
         }
         publisherCategories_ = emptyIntList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        bazCase_ = 0;
+        baz_ = null;
         return this;
       }
 
@@ -653,6 +832,13 @@ public final class EventWrapper {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.publisherCategories_ = publisherCategories_;
+        if (bazCase_ == 5) {
+          result.baz_ = baz_;
+        }
+        if (bazCase_ == 6) {
+          result.baz_ = baz_;
+        }
+        result.bazCase_ = bazCase_;
         onBuilt();
         return result;
       }
@@ -720,6 +906,19 @@ public final class EventWrapper {
           }
           onChanged();
         }
+        switch (other.getBazCase()) {
+          case BAZ_NULL: {
+            setBazNull(other.getBazNull());
+            break;
+          }
+          case BAZ_VALUE: {
+            setBazValue(other.getBazValue());
+            break;
+          }
+          case BAZ_NOT_SET: {
+            break;
+          }
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -748,6 +947,21 @@ public final class EventWrapper {
         }
         return this;
       }
+      private int bazCase_ = 0;
+      private java.lang.Object baz_;
+      public BazCase
+          getBazCase() {
+        return BazCase.forNumber(
+            bazCase_);
+      }
+
+      public Builder clearBaz() {
+        bazCase_ = 0;
+        baz_ = null;
+        onChanged();
+        return this;
+      }
+
       private int bitField0_;
 
       private com.google.protobuf.StringValue from_;
@@ -1185,6 +1399,104 @@ public final class EventWrapper {
         onChanged();
         return this;
       }
+
+      /**
+       * <pre>
+       * always set this to "true" when null
+       * </pre>
+       *
+       * <code>bool baz_null = 5;</code>
+       * @return Whether the bazNull field is set.
+       */
+      public boolean hasBazNull() {
+        return bazCase_ == 5;
+      }
+      /**
+       * <pre>
+       * always set this to "true" when null
+       * </pre>
+       *
+       * <code>bool baz_null = 5;</code>
+       * @return The bazNull.
+       */
+      public boolean getBazNull() {
+        if (bazCase_ == 5) {
+          return (java.lang.Boolean) baz_;
+        }
+        return false;
+      }
+      /**
+       * <pre>
+       * always set this to "true" when null
+       * </pre>
+       *
+       * <code>bool baz_null = 5;</code>
+       * @param value The bazNull to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBazNull(boolean value) {
+        bazCase_ = 5;
+        baz_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * always set this to "true" when null
+       * </pre>
+       *
+       * <code>bool baz_null = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBazNull() {
+        if (bazCase_ == 5) {
+          bazCase_ = 0;
+          baz_ = null;
+          onChanged();
+        }
+        return this;
+      }
+
+      /**
+       * <code>int32 baz_value = 6;</code>
+       * @return Whether the bazValue field is set.
+       */
+      public boolean hasBazValue() {
+        return bazCase_ == 6;
+      }
+      /**
+       * <code>int32 baz_value = 6;</code>
+       * @return The bazValue.
+       */
+      public int getBazValue() {
+        if (bazCase_ == 6) {
+          return (java.lang.Integer) baz_;
+        }
+        return 0;
+      }
+      /**
+       * <code>int32 baz_value = 6;</code>
+       * @param value The bazValue to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBazValue(int value) {
+        bazCase_ = 6;
+        baz_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 baz_value = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBazValue() {
+        if (bazCase_ == 6) {
+          bazCase_ = 0;
+          baz_ = null;
+          onChanged();
+        }
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1254,13 +1566,14 @@ public final class EventWrapper {
     java.lang.String[] descriptorData = {
       "\n\023event_wrapper.proto\022\005event\032\037google/pro" +
       "tobuf/timestamp.proto\032\014tagger.proto\032\036goo" +
-      "gle/protobuf/wrappers.proto\"\265\001\n\rGreeting" +
+      "gle/protobuf/wrappers.proto\"\345\001\n\rGreeting" +
       "Wrapp\022*\n\004from\030\001 \001(\0132\034.google.protobuf.St" +
       "ringValue\0220\n\014last_updated\030\002 \001(\0132\032.google" +
       ".protobuf.Timestamp\022(\n\002to\030\003 \001(\0132\034.google" +
       ".protobuf.StringValue\022\034\n\024publisher_categ" +
-      "ories\030\004 \003(\021B.Z,github.com/davidae/proto-" +
-      "definition/proto/gob\006proto3"
+      "ories\030\004 \003(\021\022\022\n\010baz_null\030\005 \001(\010H\000\022\023\n\tbaz_v" +
+      "alue\030\006 \001(\005H\000B\005\n\003bazB.Z,github.com/davida" +
+      "e/proto-definition/proto/gob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1274,7 +1587,7 @@ public final class EventWrapper {
     internal_static_event_GreetingWrapp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_GreetingWrapp_descriptor,
-        new java.lang.String[] { "From", "LastUpdated", "To", "PublisherCategories", });
+        new java.lang.String[] { "From", "LastUpdated", "To", "PublisherCategories", "BazNull", "BazValue", "Baz", });
     com.google.protobuf.TimestampProto.getDescriptor();
     tagger.Tagger.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
