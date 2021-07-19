@@ -63,7 +63,7 @@ func main() {
 	}
 
 	var valueToPointerWithoutPerson go_proto.Greeting
-	if err := proto.Unmarshal(outValueWithoutPerson, &valueToPointerWithoutPerson); err != nil {
+	if err := valueToPointerWithoutPerson.UnmarshalVT(outValueWithoutPerson); err != nil {
 		panic(err)
 	}
 
