@@ -44,6 +44,8 @@ func main() {
 		},
 	}
 
+	fmt.Printf("Greeting (with Person) with no primitive pointers:\n%s\n", greetValueWithPerson.String())
+
 	outValueWithPerson, err := proto.Marshal(&greetValueWithPerson)
 	if err != nil {
 		panic(err)
@@ -54,20 +56,21 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("valueToPointerWithPerson: %#v\n", valueToPointerWithPerson.String())
-	fmt.Printf("is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
+	fmt.Printf("Greeting (with Person) unmarshalled from Value to Pointer message:\n%s\n", valueToPointerWithPerson.String())
+	fmt.Printf("  is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
 
 	outValueWithoutPerson, err := proto.Marshal(&greetValueWithoutPerson)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("Greeting (without Person) with no primitive pointers:\n%s\n", greetValueWithoutPerson.String())
 
 	var valueToPointerWithoutPerson go_proto.Greeting
 	if err := valueToPointerWithoutPerson.UnmarshalVT(outValueWithoutPerson); err != nil {
 		panic(err)
 	}
 
-	fmt.Printf("valueToPointerWithoutPerson: %#v\n", valueToPointerWithoutPerson.String())
-	fmt.Printf("is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
-	fmt.Printf("is person nil? %t\n", valueToPointerWithoutPerson.Address.Person == nil)
+	fmt.Printf("Greeting (without Person) unmarshalled from Value to Pointer message:\n%s\n", valueToPointerWithoutPerson.String())
+	fmt.Printf("  is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
+	fmt.Printf("  is person nil? %t\n", valueToPointerWithoutPerson.Address.Person == nil)
 }
