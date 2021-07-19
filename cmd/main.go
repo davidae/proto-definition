@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"time"
 
@@ -20,22 +19,9 @@ func main() {
 		useForBilling = false
 	)
 
-	greet := go_proto.Greeting{
+	greetValueWithPerson := go_proto.GreetingValue{
 		From:                from,
-		To:                  nil,
-		LastUpdated:         timestamppb.New(time.Now()),
-		PublisherCategories: []int32{1, 2, 3},
-		Address: &go_proto.AddressPointer{
-			Street:        &street,
-			PostCode:      &postCode,
-			Person:        &go_proto.PersonPointer{FirstName: &firstName, LastName: &LastName},
-			UseForBilling: &useForBilling,
-		},
-	}
-
-	greetValue := go_proto.GreetingValue{
-		From: from,
-		// To:                  &to,
+		To:                  "",
 		LastUpdated:         timestamppb.New(time.Now()),
 		PublisherCategories: []int32{1, 2, 3},
 		Address: &go_proto.AddressValue{
@@ -46,53 +32,42 @@ func main() {
 		},
 	}
 
-	outPointer, err := proto.Marshal(&greet)
-	fmt.Println(outPointer)
-	fmt.Println(err)
+	greetValueWithoutPerson := go_proto.GreetingValue{
+		From:                from,
+		To:                  "",
+		LastUpdated:         timestamppb.New(time.Now()),
+		PublisherCategories: []int32{1, 2, 3},
+		Address: &go_proto.AddressValue{
+			Street:        street,
+			PostCode:      postCode,
+			UseForBilling: useForBilling,
+		},
+	}
 
-	outValue, err := proto.Marshal(&greetValue)
-	fmt.Println(outValue)
-	fmt.Println(err)
-
-	fmt.Printf("string pointer out,string value out:\n%q\n%q\n", string(outPointer), string(outValue))
-	fmt.Printf("pointer out equal value out? %t\n", bytes.Compare(outPointer, outValue) == 0)
-	fmt.Printf("pointer out equal value out? %t\n", string(outPointer) == string(outValue))
-
-	var valueToPointer go_proto.Greeting
-	if err := proto.Unmarshal(outValue, &valueToPointer); err != nil {
+	outValueWithPerson, err := proto.Marshal(&greetValueWithPerson)
+	if err != nil {
 		panic(err)
 	}
 
-	fmt.Printf("valueToPointer: %#v\n", valueToPointer.String())
+	var valueToPointerWithPerson go_proto.Greeting
+	if err := proto.Unmarshal(outValueWithPerson, &valueToPointerWithPerson); err != nil {
+		panic(err)
+	}
 
-	// data, err := greet.MarshalVT()
-	// if err != nil {
-	// 	panic(err)
-	// }
+	fmt.Printf("valueToPointerWithPerson: %#v\n", valueToPointerWithPerson.String())
+	fmt.Printf("is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
 
-	// greeterVT := &go_proto.Greeting{}
-	// if err := greeterVT.UnmarshalVT(data); err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Printf("getting with UnmarshalVT: %s\n", greeterVT.String())
+	outValueWithoutPerson, err := proto.Marshal(&greetValueWithoutPerson)
+	if err != nil {
+		panic(err)
+	}
 
-	// greeterBasic := &go_proto.Greeting{}
-	// if err := proto.Unmarshal(data, greeterBasic); err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Printf("getting with basic: %s\n", greeterVT.String())
+	var valueToPointerWithoutPerson go_proto.Greeting
+	if err := proto.Unmarshal(outValueWithoutPerson, &valueToPointerWithoutPerson); err != nil {
+		panic(err)
+	}
 
-	// // wrap := gogo_proto.GreetingWrapp{
-	// // 	Baz: &gogo_proto.GreetingWrapp_BazValue{BazValue: 1},
-	// // }
-	// // fmt.Printf("wrap: %#v\n", wrap)
-
-	// reflect := greet.ProtoReflect()
-	// fmt.Println("protoreflect start")
-	// reflect.Range(func(fd protoreflect.FieldDescriptor, v protoreflect.Value) bool {
-	// 	fmt.Printf("jsonName: %s, cardinality: %s, presence: %t\n", fd.JSONName(), fd.Cardinality().GoString(), fd.HasPresence())
-	// 	fmt.Printf("  isValid? %t, value: %#v\n", v.IsValid(), v.Interface())
-	// 	return true
-	// })
-	// fmt.Println("protoreflect end")
+	fmt.Printf("valueToPointerWithoutPerson: %#v\n", valueToPointerWithoutPerson.String())
+	fmt.Printf("is To nil? %t, is UseForBilling nil? %t\n", valueToPointerWithPerson.To == nil, valueToPointerWithPerson.Address.UseForBilling == nil)
+	fmt.Printf("is person nil? %t\n", valueToPointerWithoutPerson.Address.Person == nil)
 }

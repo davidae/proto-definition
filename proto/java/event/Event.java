@@ -2417,17 +2417,12 @@ public final class Event {
     com.google.protobuf.TimestampOrBuilder getLastUpdatedOrBuilder();
 
     /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
-     * @return Whether the to field is set.
-     */
-    boolean hasTo();
-    /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+     * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
      * @return The to.
      */
     java.lang.String getTo();
     /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+     * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
      * @return The bytes for to.
      */
     com.google.protobuf.ByteString
@@ -2535,14 +2530,14 @@ public final class Event {
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000001;
+
               to_ = s;
               break;
             }
             case 32: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 publisherCategories_ = newIntList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               publisherCategories_.addInt(input.readSInt32());
               break;
@@ -2550,9 +2545,9 @@ public final class Event {
             case 34: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
                 publisherCategories_ = newIntList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               while (input.getBytesUntilLimit() > 0) {
                 publisherCategories_.addInt(input.readSInt32());
@@ -2588,7 +2583,7 @@ public final class Event {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           publisherCategories_.makeImmutable(); // C
         }
         this.unknownFields = unknownFields.build();
@@ -2608,7 +2603,6 @@ public final class Event {
               event.Event.GreetingValue.class, event.Event.GreetingValue.Builder.class);
     }
 
-    private int bitField0_;
     public static final int FROM_FIELD_NUMBER = 1;
     private volatile java.lang.Object from_;
     /**
@@ -2676,15 +2670,7 @@ public final class Event {
     public static final int TO_FIELD_NUMBER = 3;
     private volatile java.lang.Object to_;
     /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
-     * @return Whether the to field is set.
-     */
-    @java.lang.Override
-    public boolean hasTo() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+     * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
      * @return The to.
      */
     @java.lang.Override
@@ -2701,7 +2687,7 @@ public final class Event {
       }
     }
     /**
-     * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+     * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
      * @return The bytes for to.
      */
     @java.lang.Override
@@ -2794,7 +2780,7 @@ public final class Event {
       if (lastUpdated_ != null) {
         output.writeMessage(2, getLastUpdated());
       }
-      if (((bitField0_ & 0x00000001) != 0)) {
+      if (!getToBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, to_);
       }
       if (getPublisherCategoriesList().size() > 0) {
@@ -2823,7 +2809,7 @@ public final class Event {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getLastUpdated());
       }
-      if (((bitField0_ & 0x00000001) != 0)) {
+      if (!getToBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, to_);
       }
       {
@@ -2866,11 +2852,8 @@ public final class Event {
         if (!getLastUpdated()
             .equals(other.getLastUpdated())) return false;
       }
-      if (hasTo() != other.hasTo()) return false;
-      if (hasTo()) {
-        if (!getTo()
-            .equals(other.getTo())) return false;
-      }
+      if (!getTo()
+          .equals(other.getTo())) return false;
       if (!getPublisherCategoriesList()
           .equals(other.getPublisherCategoriesList())) return false;
       if (hasAddress() != other.hasAddress()) return false;
@@ -2895,10 +2878,8 @@ public final class Event {
         hash = (37 * hash) + LAST_UPDATED_FIELD_NUMBER;
         hash = (53 * hash) + getLastUpdated().hashCode();
       }
-      if (hasTo()) {
-        hash = (37 * hash) + TO_FIELD_NUMBER;
-        hash = (53 * hash) + getTo().hashCode();
-      }
+      hash = (37 * hash) + TO_FIELD_NUMBER;
+      hash = (53 * hash) + getTo().hashCode();
       if (getPublisherCategoriesCount() > 0) {
         hash = (37 * hash) + PUBLISHER_CATEGORIES_FIELD_NUMBER;
         hash = (53 * hash) + getPublisherCategoriesList().hashCode();
@@ -3049,9 +3030,9 @@ public final class Event {
           lastUpdatedBuilder_ = null;
         }
         to_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
+
         publisherCategories_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (addressBuilder_ == null) {
           address_ = null;
         } else {
@@ -3085,20 +3066,16 @@ public final class Event {
       public event.Event.GreetingValue buildPartial() {
         event.Event.GreetingValue result = new event.Event.GreetingValue(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.from_ = from_;
         if (lastUpdatedBuilder_ == null) {
           result.lastUpdated_ = lastUpdated_;
         } else {
           result.lastUpdated_ = lastUpdatedBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          to_bitField0_ |= 0x00000001;
-        }
         result.to_ = to_;
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           publisherCategories_.makeImmutable();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.publisherCategories_ = publisherCategories_;
         if (addressBuilder_ == null) {
@@ -3106,7 +3083,6 @@ public final class Event {
         } else {
           result.address_ = addressBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3162,15 +3138,14 @@ public final class Event {
         if (other.hasLastUpdated()) {
           mergeLastUpdated(other.getLastUpdated());
         }
-        if (other.hasTo()) {
-          bitField0_ |= 0x00000001;
+        if (!other.getTo().isEmpty()) {
           to_ = other.to_;
           onChanged();
         }
         if (!other.publisherCategories_.isEmpty()) {
           if (publisherCategories_.isEmpty()) {
             publisherCategories_ = other.publisherCategories_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensurePublisherCategoriesIsMutable();
             publisherCategories_.addAll(other.publisherCategories_);
@@ -3407,14 +3382,7 @@ public final class Event {
 
       private java.lang.Object to_ = "";
       /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
-       * @return Whether the to field is set.
-       */
-      public boolean hasTo() {
-        return ((bitField0_ & 0x00000001) != 0);
-      }
-      /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+       * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
        * @return The to.
        */
       public java.lang.String getTo() {
@@ -3430,7 +3398,7 @@ public final class Event {
         }
       }
       /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+       * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
        * @return The bytes for to.
        */
       public com.google.protobuf.ByteString
@@ -3447,7 +3415,7 @@ public final class Event {
         }
       }
       /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+       * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
        * @param value The to to set.
        * @return This builder for chaining.
        */
@@ -3456,23 +3424,23 @@ public final class Event {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  
         to_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+       * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
        * @return This builder for chaining.
        */
       public Builder clearTo() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
         to_ = getDefaultInstance().getTo();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
+       * <code>string to = 3 [(.tagger.tags) = "parquet:&#92;"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY&#92;""];</code>
        * @param value The bytes for to to set.
        * @return This builder for chaining.
        */
@@ -3482,7 +3450,7 @@ public final class Event {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        bitField0_ |= 0x00000001;
+        
         to_ = value;
         onChanged();
         return this;
@@ -3490,9 +3458,9 @@ public final class Event {
 
       private com.google.protobuf.Internal.IntList publisherCategories_ = emptyIntList();
       private void ensurePublisherCategoriesIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           publisherCategories_ = mutableCopy(publisherCategories_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
       /**
@@ -3501,7 +3469,7 @@ public final class Event {
        */
       public java.util.List<java.lang.Integer>
           getPublisherCategoriesList() {
-        return ((bitField0_ & 0x00000002) != 0) ?
+        return ((bitField0_ & 0x00000001) != 0) ?
                  java.util.Collections.unmodifiableList(publisherCategories_) : publisherCategories_;
       }
       /**
@@ -3562,7 +3530,7 @@ public final class Event {
        */
       public Builder clearPublisherCategories() {
         publisherCategories_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -7228,32 +7196,32 @@ public final class Event {
       "N_DICTIONARY\"H\000\210\001\001\022k\n\024publisher_categori" +
       "es\030\004 \003(\021BM\232\204\236\003Hparquet:\"name=publisher_c" +
       "ategories, type=INT32, repetitiontype=RE" +
-      "PEATED\"B\005\n\003_to\"\370\003\n\rGreetingValue\022e\n\004from" +
+      "PEATED\"B\005\n\003_to\"\354\003\n\rGreetingValue\022e\n\004from" +
       "\030\001 \001(\tBW\232\204\236\003Rparquet:\"name=from,type=BYT" +
       "E_ARRAY, convertedtype=UTF8, encoding=PL" +
       "AIN_DICTIONARY\"\022~\n\014last_updated\030\002 \001(\0132\032." +
       "google.protobuf.TimestampBL\232\204\236\003Gparquet:" +
       "\"name=last_updated, type=INT64, converte" +
-      "dtype=TIMESTAMP_MILLIS\"\022f\n\002to\030\003 \001(\tBU\232\204\236" +
+      "dtype=TIMESTAMP_MILLIS\"\022a\n\002to\030\003 \001(\tBU\232\204\236" +
       "\003Pparquet:\"name=to,type=BYTE_ARRAY, conv" +
       "ertedtype=UTF8, encoding=PLAIN_DICTIONAR" +
-      "Y\"H\000\210\001\001\022k\n\024publisher_categories\030\004 \003(\021BM\232" +
-      "\204\236\003Hparquet:\"name=publisher_categories, " +
-      "type=INT32, repetitiontype=REPEATED\"\022$\n\007" +
-      "address\030\005 \001(\0132\023.event.AddressValueB\005\n\003_t" +
-      "o\"\276\001\n\016AddressPointer\022\023\n\006street\030\001 \001(\tH\000\210\001" +
-      "\001\022\026\n\tpost_code\030\002 \001(\rH\001\210\001\001\022)\n\006person\030\003 \001(" +
-      "\0132\024.event.PersonPointerH\002\210\001\001\022\034\n\017use_for_" +
-      "billing\030\004 \001(\010H\003\210\001\001B\t\n\007_streetB\014\n\n_post_c" +
-      "odeB\t\n\007_personB\022\n\020_use_for_billing\"]\n\rPe" +
-      "rsonPointer\022\027\n\nfirst_name\030\001 \001(\tH\000\210\001\001\022\026\n\t" +
-      "last_name\030\002 \001(\tH\001\210\001\001B\r\n\013_first_nameB\014\n\n_" +
-      "last_name\"n\n\014AddressValue\022\016\n\006street\030\001 \001(" +
-      "\t\022\021\n\tpost_code\030\002 \001(\r\022\"\n\006person\030\003 \001(\0132\022.e" +
-      "vent.PersonValue\022\027\n\017use_for_billing\030\004 \001(" +
-      "\010\"4\n\013PersonValue\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\t" +
-      "last_name\030\002 \001(\tB.Z,github.com/davidae/pr" +
-      "oto-definition/proto/gob\006proto3"
+      "Y\"\022k\n\024publisher_categories\030\004 \003(\021BM\232\204\236\003Hp" +
+      "arquet:\"name=publisher_categories, type=" +
+      "INT32, repetitiontype=REPEATED\"\022$\n\007addre" +
+      "ss\030\005 \001(\0132\023.event.AddressValue\"\276\001\n\016Addres" +
+      "sPointer\022\023\n\006street\030\001 \001(\tH\000\210\001\001\022\026\n\tpost_co" +
+      "de\030\002 \001(\rH\001\210\001\001\022)\n\006person\030\003 \001(\0132\024.event.Pe" +
+      "rsonPointerH\002\210\001\001\022\034\n\017use_for_billing\030\004 \001(" +
+      "\010H\003\210\001\001B\t\n\007_streetB\014\n\n_post_codeB\t\n\007_pers" +
+      "onB\022\n\020_use_for_billing\"]\n\rPersonPointer\022" +
+      "\027\n\nfirst_name\030\001 \001(\tH\000\210\001\001\022\026\n\tlast_name\030\002 " +
+      "\001(\tH\001\210\001\001B\r\n\013_first_nameB\014\n\n_last_name\"n\n" +
+      "\014AddressValue\022\016\n\006street\030\001 \001(\t\022\021\n\tpost_co" +
+      "de\030\002 \001(\r\022\"\n\006person\030\003 \001(\0132\022.event.PersonV" +
+      "alue\022\027\n\017use_for_billing\030\004 \001(\010\"4\n\013PersonV" +
+      "alue\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tlast_name\030\002 " +
+      "\001(\tB.Z,github.com/davidae/proto-definiti" +
+      "on/proto/gob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7278,7 +7246,7 @@ public final class Event {
     internal_static_event_GreetingValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_GreetingValue_descriptor,
-        new java.lang.String[] { "From", "LastUpdated", "To", "PublisherCategories", "Address", "To", });
+        new java.lang.String[] { "From", "LastUpdated", "To", "PublisherCategories", "Address", });
     internal_static_event_AddressPointer_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_event_AddressPointer_fieldAccessorTable = new

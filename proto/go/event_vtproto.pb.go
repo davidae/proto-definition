@@ -254,10 +254,10 @@ func (m *GreetingValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x22
 	}
-	if m.To != nil {
-		i -= len(*m.To)
-		copy(dAtA[i:], *m.To)
-		i = encodeVarint(dAtA, i, uint64(len(*m.To)))
+	if len(m.To) > 0 {
+		i -= len(m.To)
+		copy(dAtA[i:], m.To)
+		i = encodeVarint(dAtA, i, uint64(len(m.To)))
 		i--
 		dAtA[i] = 0x1a
 	}
@@ -619,8 +619,8 @@ func (m *GreetingValue) SizeVT() (n int) {
 		}
 		n += 1 + l + sov(uint64(l))
 	}
-	if m.To != nil {
-		l = len(*m.To)
+	l = len(m.To)
+	if l > 0 {
 		n += 1 + l + sov(uint64(l))
 	}
 	if len(m.PublisherCategories) > 0 {
@@ -1360,8 +1360,7 @@ func (m *GreetingValue) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(dAtA[iNdEx:postIndex])
-			m.To = &s
+			m.To = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
 			if wireType == 0 {

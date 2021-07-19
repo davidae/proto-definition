@@ -25,7 +25,7 @@ message GreetingSimple {
 message GreetingValue {
 	string from = 1 [(tagger.tags) = "parquet:\"name=from,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
 	google.protobuf.Timestamp last_updated = 2 [(tagger.tags) = "parquet:\"name=last_updated, type=INT64, convertedtype=TIMESTAMP_MILLIS\""];
-	optional string to = 3 [(tagger.tags) = "parquet:\"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
+	string to = 3 [(tagger.tags) = "parquet:\"name=to,type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY\""];
 	repeated sint32 publisher_categories = 4 [(tagger.tags) = "parquet:\"name=publisher_categories, type=INT32, repetitiontype=REPEATED\""];
 	AddressValue address = 5;
 }
