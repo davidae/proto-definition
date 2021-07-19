@@ -14,4 +14,8 @@ message GreetingWrapp {
 	google.protobuf.Timestamp last_updated = 2;
 	google.protobuf.StringValue to = 3;
 	repeated sint32 publisher_categories = 4;
+	oneof baz {
+		bool baz_null = 5;  // always set this to "true" when null
+		int32 baz_value = 6;
+	  }
 }
